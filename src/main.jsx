@@ -11,8 +11,7 @@ import { LoaderProvider } from "./context/LoaderProvider.jsx";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <>
-    <BrowserRouter>
+  <BrowserRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <LoaderProvider>
@@ -21,5 +20,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </PersistGate>
     </Provider>
   </BrowserRouter>
-  </>
 );
