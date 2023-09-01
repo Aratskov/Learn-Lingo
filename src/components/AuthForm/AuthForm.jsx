@@ -14,14 +14,17 @@ import {
   Input,
   Button,
   TextError,
+  ToggleBtn,
 } from "./AuthForm.styled";
 import Icon from "../../assets/icons/close.svg";
 import { loginUser, registerUser } from "../../redux/auth/authOperation";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 export const AuthForm = ({ isRegister }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [showPassword, setShowPassword] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -33,11 +36,14 @@ export const AuthForm = ({ isRegister }) => {
       ? validationSchemaRegister
       : validationSchemaLogin,
     onSubmit: (values) => {
-      isRegister
-      ? dispatch(registerUser(values))
-      : dispatch(loginUser(values))
+      isRegister ? dispatch(registerUser(values)) : dispatch(loginUser(values));
     },
   });
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <BackdropModal closeModal={() => navigate(-1)}>
       <Modal>
@@ -82,15 +88,18 @@ export const AuthForm = ({ isRegister }) => {
                 <TextError>{formik.errors.email}</TextError>
               )}
             </label>
-            <label htmlFor="password">
+
+            <label htmlFor="password" style={{ position: "relative" }}>
               <Input
                 id="password"
                 name="password"
-                // type={showPassword ? "text" : "password"}
+                type={showPassword ? "text" : "password"}
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 placeholder="Password"
               />
+              <ToggleBtn onClick={togglePassword} />
+
               {formik.touched.password && formik.errors.password && (
                 <TextError>{formik.errors.password}</TextError>
               )}

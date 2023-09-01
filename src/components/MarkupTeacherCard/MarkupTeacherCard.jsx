@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   ImageWrap,
   Image,
@@ -22,14 +24,20 @@ import Icon from "../../assets/icons/book.svg";
 import Rating from "../../assets/icons/rating.svg";
 import { MarkupReadMore } from "../MarkupReadMore/MarkupReadMore";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorites, removeFavorites } from "../../redux/teachers/teachersOperation";
+import {
+  addFavorites,
+  removeFavorites,
+} from "../../redux/teachers/teachersOperation";
 import { selectFavorites } from "../../redux/teachers/teachersSelect";
+import { isAuthSelect } from "../../redux/auth/authSelect";
 
 export const MarkupTeacherCard = ({ teacher }) => {
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const likedTeacher=useSelector(selectFavorites)
+  const isAuth = useSelector(isAuthSelect);
+  const likedTeacher = useSelector(selectFavorites);
 
   const {
     avatar_url,
@@ -43,19 +51,18 @@ export const MarkupTeacherCard = ({ teacher }) => {
     price_per_hour,
     experience,
     reviews,
-    id
+    id,
   } = teacher;
 
-  const isLiked = likedTeacher.some(teacher => teacher.surname === surname);
-  const isLikedId = likedTeacher.find(teacher => teacher.surname === surname)?.id || null;
-
+  const isLiked = likedTeacher.some((teacher) => teacher.surname === surname);
+  const isLikedId =
+    likedTeacher.find((teacher) => teacher.surname === surname)?.id || null;
 
   const handleLikeClick = () => {
     if (isLiked) {
-      dispatch(removeFavorites(id?id:isLikedId))
-      console.log("isLikedId", isLikedId)
+      dispatch(removeFavorites(id ? id : isLikedId));
     } else {
-      dispatch(addFavorites(teacher));
+      isAuth ? dispatch(addFavorites(teacher)) : navigate('/login');
     }
   };
 

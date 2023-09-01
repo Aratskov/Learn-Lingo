@@ -107,3 +107,16 @@ export const TextError = styled.p`
   color: red;
   font-size: 10px;
 `;
+
+export const ToggleBtn = styled.div`
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+
+  background-color: green;
+
+  cursor: pointer;
+`;

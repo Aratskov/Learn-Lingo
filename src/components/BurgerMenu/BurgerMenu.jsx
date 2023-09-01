@@ -30,15 +30,16 @@ export const BurgerMenu = ({ onClick }) => {
           <LinkStyled to="/teachers" onClick={onClick}>
             Teachers
           </LinkStyled>
-          <LinkStyled to="/favorites" onClick={onClick}>
-            Favorites
-          </LinkStyled>
-          {/* {isAuth && <LinkStyled to="/favorites">Favorites</LinkStyled>} */}
+          {isAuth && <LinkStyled to="/favorites">Favorites</LinkStyled>}
         </Nav>
-        {isAuth ? (
+        <div>
+           {isAuth ? (
           <button onClick={() => dispatch(logout())}>LogOut</button>
         ) : (
-          <>
+            <>
+              <button>Login</button>
+              <button>Register</button>
+
             {/* <WrapLogin to={getLoginRoute()}>
                     <SVG>
                       <USE href={`${Icons}#icon-log-in`} />
@@ -51,6 +52,7 @@ export const BurgerMenu = ({ onClick }) => {
                   </ButtonRegister> */}
           </>
         )}
+       </div>
       </BurgerMenuList>
     </BurgerMenuContainer>,
     modalRoot

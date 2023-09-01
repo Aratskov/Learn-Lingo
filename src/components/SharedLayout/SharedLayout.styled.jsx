@@ -119,6 +119,10 @@ export const WrapLogin = styled(NavLink)`
     color: #ffdc86;
     stroke: red;
   }
+
+  @media screen and (max-width: 1069px) {
+    display: none;
+  }
 `;
 
 export const ButtonText = styled.p`
@@ -146,4 +150,8 @@ export const ButtonRegister = styled(NavLink)`
   border-radius: 12px;
 
   cursor: pointer;
+
+   @media screen and (max-width: 1069px) {
+    display: none;
+  }
 `;

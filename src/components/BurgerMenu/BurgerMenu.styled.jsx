@@ -32,6 +32,7 @@ export const CloseButton = styled.button`
 
 export const BurgerMenuList = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
