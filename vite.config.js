@@ -5,12 +5,12 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   base: "/learn-lingo/",
-  rollupOptions: {
-      external: ["react", "react-router", "react-router-dom", "react-redux"],
-      output: {
-        globals: {
-          react: "React",
-        },
-      },
-    },
+  // rollupOptions: {
+  //     external: ["react", "react-router", "react-router-dom", "react-redux"],
+  //     output: {
+  //       globals: {
+  //         react: "React",
+  //       },
+  //     },
+  //   },
 })
